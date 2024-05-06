@@ -5,5 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Event Registration Form</h1>
+
+    <form id="eventForm">
+      <label for="nameInput">Name : </label>
+      <input type="text" id="nameInput" />
+      <br /><br />
+
+      <label for="emailInput">Enter Email Address : </label>
+      <input type="email" id="emailInput" />
+      <br /><br />
+
+      <label>Event Type : </label>
+      <br />
+      <input type="radio" name="type" value="Conference" />Conference
+      <br />
+
+      <input type="radio" name="type" value="Workshop" />Workshop
+      <br />
+
+      <input type="radio" name="type" value="Networking" />Networking
+
+      <br /><br />
+
+      <label>Dietary Restrictions : </label>
+      <br />
+      <input type="checkbox" name="restrictions" value="Vegetarian" />Vegetarian
+      <br />
+
+      <input type="checkbox" name="restrictions" value="Vegan" />Vegan
+      <br />
+
+      <input
+        type="checkbox"
+        name="restrictions"
+        value="Gluten-Free" />Gluten-Free
+
+      <br /><br />
+
+      <label>T-Shirt Size : </label>
+      <select id="sizeSelect">
+        <option value="Medium">Medium</option>
+        <option value="Small">Small</option>
+        <option value="Large">Large</option>
+      </select>
+      <br /><br />
+
+      <input type="submit" value="Register" />
+    </form>
+
+    <div id="details"></div>
+
+    <script>
+      const eventForm = document.getElementById("eventForm");
+      eventForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const userName = document.getElementById("nameInput").value;
+        const email = document.getElementById("emailInput").value;
+        const eventType = document.querySelector(
+          `input[name="type"]:checked`
+        ).value;
+
+        const restrictions = document.querySelectorAll(
+          `input[name="restrictions"]:checked`
+        );
+
+        let selectedRestrictions = [];
+        for (let i = 0; i < restrictions.length; i++) {
+          selectedRestrictions.push(restrictions[i].value);
+        }
+
+        const size = document.getElementById("sizeSelect").value;
+
+        const registrationInputs = `
+        <h2>Registration Details:</h2>
+    <p><b>Name:</b> ${userName}</p>
+    <p><b>Email :</b> ${email}</p>
+    <p><b>Event Type : </b>${eventType}</p>
+    <p><b>Restrictions :</b> ${selectedRestrictions}</p>
+    <p><b>T-Shirt Size : </b>${size}</p>
+
+        `;
+        const details = document.getElementById("details");
+        details.innerHTML = registrationInputs;
+      });
+    </script>
+  </body>
 </html>
