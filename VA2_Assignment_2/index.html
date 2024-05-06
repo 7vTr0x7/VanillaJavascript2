@@ -18,7 +18,6 @@
 
       <label for="emailInput"><b>Email Id :</b> </label>
       <input type="email" id="emailInput" />
-
       <br /><br />
 
       <label><b>Gender : </b></label> <br />
@@ -37,15 +36,16 @@
 
       <label><b>Are You a College Graduate? </b></label> <br />
       <label for="yes">
-        <input type="radio" name="gender" value="Yes" id="yes" />Yes <br />
+        <input type="radio" name="qualification" value="Yes" id="yes" />Yes
+        <br />
       </label>
       <label for="no">
-        <input type="radio" name="gender" value="No" id="no" />No <br />
+        <input type="radio" name="qualification" value="No" id="no" />No <br />
       </label>
       <label for="dropout">
         <input
           type="radio"
-          name="gender"
+          name="qualification"
           value="Dropout"
           id="dropout" />Dropout<br />
       </label>
@@ -71,44 +71,126 @@
       <label for="linkedin">
         <input
           type="checkbox"
-          name="found"
+          name="foundThrough"
           value="LinkedIn"
           id="linkedin" />LinkedIn <br />
       </label>
       <label for="yt">
-        <input type="checkbox" name="found" value="You Tube" id="yt" />You Tube
+        <input
+          type="checkbox"
+          name="foundThrough"
+          value="You Tube"
+          id="yt" />You Tube
         <br />
       </label>
       <label for="insta">
         <input
           type="checkbox"
-          name="found"
+          name="foundThrough"
           value="Instagram"
           id="insta" />Instagram <br />
       </label>
       <label for="twitter">
         <input
           type="checkbox"
-          name="found"
+          name="foundThrough"
           value="Twitter"
           id="twitter" />LinkedIn <br />
       </label>
       <label for="FnF">
         <input
           type="checkbox"
-          name="found"
+          name="foundThrough"
           value="Friends & Family"
           id="FnF" />Friends and Family
       </label>
       <br />
       <label for="others">
-        <input type="checkbox" name="found" value="Other" id="others" />Other
+        <input
+          type="checkbox"
+          name="foundThrough"
+          value="Other"
+          id="others" />Other
       </label>
 
       <br />
       <br /><br />
 
-      <input type="checkbox" />
+      <label for="confirmation">
+        <input type="checkbox" id="confirmation" value="" />
+        <b> I Confirm All The Information In This Form Is Factually True. </b>
+      </label>
+      <br /><br />
+
+      <input type="submit" value="Submit Details" />
     </form>
+
+    <div id="details"></div>
+    <p id="validation"></p>
+
+    <script>
+      const waitListForm = document.getElementById("waitListForm");
+      waitListForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById("nameInput").value;
+        const number = document.getElementById("numberInput").value;
+        const email = document.getElementById("emailInput").value;
+
+        const gender = document.querySelector(
+          `input[name="gender"]:checked`
+        ).value;
+
+        const qualification = document.querySelector(
+          `input[name="qualification"]:checked`
+        ).value;
+
+        const occupation = document.getElementById("workSelect").value;
+
+        const reason = document.getElementById("reasonTextarea").value;
+
+        const foundThrough = document.querySelectorAll(
+          `input[name="foundThrough"]:checked`
+        );
+
+        let selectedOptions = [];
+
+        for (let i = 0; i < foundThrough.length; i++) {
+          selectedOptions.push(foundThrough[i].value);
+        }
+
+        const inputsData = `
+
+      <h2>Details Submitted:</h2>
+      <p><b>Name : </b>${name}</p>
+      <p><b>Phone Number : </b>${number}</p>
+      <p><b>Email Id : </b>${email}</p>
+      <p><b>Gender : </b>${gender}</p>
+      <p><b>Are You A College Graduate? : </b>${qualification}</p>
+      <p><b>Are You Working Anywhere Full-Time Or Part-Time : </b>${occupation}</p>
+      <p><b>Why Do you Want To Learn Web Development?  : </b>${reason}</p>
+      <p><b>How Do You Come To Know About Us?  : </b>${selectedOptions.join(
+        ", "
+      )}</p>
+
+          `;
+
+        const validation = document.getElementById("validation");
+
+        const dotInx = email.indexOf(".");
+        const atInx = email.indexOf("@");
+        const includesAt = email.includes("@");
+        const includesDot = email.includes(".");
+
+        const details = document.getElementById("details");
+
+        if (includesAt && includesDot && atInx < dotInx) {
+          details.innerHTML = inputsData;
+        } else {
+          validation.textContent =
+            "InValid Email : @ or . Is Missing Or there position is Incorrect. ";
+        }
+      });
+    </script>
   </body>
 </html>
