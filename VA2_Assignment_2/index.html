@@ -5,5 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>User WaitList Form</h1>
+    <form id="waitListForm">
+      <label for="nameInput"> <b>Full Name :</b> </label>
+      <input type="text" id="nameInput" />
+      <br /><br />
+
+      <label for="nameInput"><b>Phone Number :</b> </label>
+      <input type="number" id="numberInput" />
+      <br /><br />
+
+      <label for="emailInput"><b>Email Id :</b> </label>
+      <input type="email" id="emailInput" />
+
+      <br /><br />
+
+      <label><b>Gender : </b></label> <br />
+      <label for="male">
+        <input type="radio" name="gender" value="Male" id="male" />Male <br />
+      </label>
+      <label for="female">
+        <input type="radio" name="gender" value="Female" id="female" />Female
+        <br />
+      </label>
+      <label for="other">
+        <input type="radio" name="gender" value="Other" id="other" />Other<br />
+      </label>
+
+      <br /><br />
+
+      <label><b>Are You a College Graduate? </b></label> <br />
+      <label for="yes">
+        <input type="radio" name="gender" value="Yes" id="yes" />Yes <br />
+      </label>
+      <label for="no">
+        <input type="radio" name="gender" value="No" id="no" />No <br />
+      </label>
+      <label for="dropout">
+        <input
+          type="radio"
+          name="gender"
+          value="Dropout"
+          id="dropout" />Dropout<br />
+      </label>
+
+      <br /><br />
+
+      <label><b>Are You Working Anywhere Full-Time Or Part-Time?</b> </label>
+      <br />
+      <select id="workSelect">
+        <option value="Working Full-Time">Working Full-Time</option>
+        <option value="Working Part-Time">Working Part-Time</option>
+        <option value="Not-Working Anywhere">Not-Working Anywhere</option>
+      </select>
+
+      <br /><br />
+
+      <label><b>Why Do you Want To Learn Web Development? </b></label> <br />
+      <textarea id="reasonTextarea" cols="60" rows="5"></textarea>
+
+      <br /><br />
+
+      <label><b>How Do You Come To Know About Us? </b></label> <br />
+      <label for="linkedin">
+        <input
+          type="checkbox"
+          name="found"
+          value="LinkedIn"
+          id="linkedin" />LinkedIn <br />
+      </label>
+      <label for="yt">
+        <input type="checkbox" name="found" value="You Tube" id="yt" />You Tube
+        <br />
+      </label>
+      <label for="insta">
+        <input
+          type="checkbox"
+          name="found"
+          value="Instagram"
+          id="insta" />Instagram <br />
+      </label>
+      <label for="twitter">
+        <input
+          type="checkbox"
+          name="found"
+          value="Twitter"
+          id="twitter" />LinkedIn <br />
+      </label>
+      <label for="FnF">
+        <input
+          type="checkbox"
+          name="found"
+          value="Friends & Family"
+          id="FnF" />Friends and Family
+      </label>
+      <br />
+      <label for="others">
+        <input type="checkbox" name="found" value="Other" id="others" />Other
+      </label>
+
+      <br />
+      <br /><br />
+
+      <input type="checkbox" />
+    </form>
+  </body>
 </html>
