@@ -42,19 +42,27 @@
 
 
   <script>
-    let playerData = [
-      {
-        id: "1",
-        player: "Player 1",
-        country: "India",
-        role: "Batsmen"
-      }, {
-        id: "2",
-        player: "Player 2",
-        country: "Australia",
-        role: "Bowler"
-      },
-    ]
+      const playerData = [
+        {
+          id: 1,
+          name: "Virat",
+          country: "India",
+          role: "Batsman",
+        },
+        {
+          id: 2,
+          name: "Shikhar",
+          country: "India",
+          role: "Batsman",
+        },
+        {
+          id: 3,
+          name: "Rohit",
+          country: "India",
+          role: "Batsman",
+        },
+      ];
+
 
 
     const getPlayerId = (id) => {
@@ -67,7 +75,7 @@
     let player;
 
     for (let i = 0; i < playerData.length; i++) {
-      if (playerData[i].id === playerId) {
+      if (playerData[i].id === Number(playerId)) {
         player = playerData[i]
       }
     }
@@ -79,7 +87,7 @@
    <h1>Player Details</h1>     
      <div class="card"> 
       <div class="card-header"> 
-      <h2>${player.player} </h2>
+      <h2>${player.name} </h2>
     </div>
     <div class="card-body"> 
       <p > Country : ${player.country} </p>
