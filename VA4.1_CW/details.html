@@ -57,14 +57,20 @@
         },
         {
           id: 2,
-          name: "Shikhar",
-          country: "India",
-          role: "Batsman",
+          name: "Starc",
+          country: "Australia",
+          role: "Bowler",
         },
         {
           id: 3,
           name: "Rohit",
           country: "India",
+          role: "Batsman",
+        },
+        {
+          id: 4,
+          name: "Stoinis",
+          country: "Australia",
           role: "Batsman",
         },
       ];
@@ -84,24 +90,44 @@
         }
       }
 
-      let playerDetails = document.getElementById("playerDetails");
+      const playerDetails = document.getElementById("playerDetails");
 
       if (player) {
-        playerDetails.innerHTML = `
-     <div class="card"> 
-      <div class="card-header"> 
-      <h2>${player.name} </h2>
-    </div>
-    <div class="card-body"> 
-      <p > Country : ${player.country} </p>
-      <p class="m-0"> Role : ${player.role} </p>
-      </div>
-      </div>
-      `;
+        const card = document.createElement("div");
+        card.className = "card my-4";
+
+        const h2 = document.createElement("h2");
+        h2.className = "card-text";
+        h2.textContent = `${player.name}`;
+
+        const cardHeader = document.createElement("div");
+        cardHeader.className = "card-header";
+
+        cardHeader.appendChild(h2);
+
+        const cardBody = document.createElement("div");
+        cardBody.className = "card-body";
+
+        const country = document.createElement("div");
+        country.className = "card-text";
+        country.innerHTML = `<strong>Country : </strong> ${player.country}`;
+
+        const role = document.createElement("div");
+        role.className = "card-text";
+        role.innerHTML = `<strong>Role : </strong> ${player.role}`;
+
+        cardBody.appendChild(country);
+        cardBody.appendChild(role);
+
+        card.appendChild(cardHeader);
+        card.appendChild(cardBody);
+
+        playerDetails.appendChild(card);
       } else {
-        const notFound = document.createElement("h2");
+        const notFound = document.createElement("h3");
         notFound.textContent = "Not Found";
-        playerDetails.innerHTML = notFound;
+
+        playerDetails.appendChild(notFound);
       }
     </script>
   </body>
