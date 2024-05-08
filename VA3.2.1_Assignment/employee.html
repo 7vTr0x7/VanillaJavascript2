@@ -143,12 +143,10 @@
               filteredEmployees.push(employees[i]);
             }
           }
+          updateEmployeeDetails(filteredEmployees);
         } else {
-          for (let i = 0; i < employees.length; i++) {
-            filteredEmployees.push(employees[i]);
-          }
+          updateEmployeeDetails(employees);
         }
-        updateEmployeeDetails(filteredEmployees);
       });
 
       updateEmployeeDetails(employees);
