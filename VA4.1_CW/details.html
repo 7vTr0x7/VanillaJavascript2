@@ -41,9 +41,11 @@
         </div>
       </nav>
     </header>
-    <main>
-      <section id="playerDetails" class="container"></section>
-    </main>
+    <section class="container">
+      <div id="playerDetails">
+        <h1>Player Details</h1>
+      </div>
+    </section>
 
     <script>
       const playerData = [
@@ -86,7 +88,6 @@
 
       if (player) {
         playerDetails.innerHTML = `
-   <h1>Player Details</h1>     
      <div class="card"> 
       <div class="card-header"> 
       <h2>${player.name} </h2>
@@ -98,7 +99,9 @@
       </div>
       `;
       } else {
-        playerDetails.innerHTML = `<h1>Not Found</h1>  `;
+        const notFound = document.createElement("h2");
+        notFound.textContent = "Not Found";
+        playerDetails.innerHTML = notFound;
       }
     </script>
   </body>
