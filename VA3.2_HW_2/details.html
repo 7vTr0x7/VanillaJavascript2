@@ -49,7 +49,7 @@
     <script>
       let movieData = [
         {
-          id: "1",
+          id: 1,
           movie: "Movie 1",
           genre: "Action",
           details: "This is an Action movie",
@@ -57,7 +57,7 @@
           director: "Guts",
         },
         {
-          id: "2",
+          id: 2,
           movie: "Movie 2",
           genre: "Drama",
           details: "This is an Drama movie",
@@ -66,7 +66,7 @@
         },
 
         {
-          id: "3",
+          id: 3,
           movie: "Movie 3",
           genre: "Comedy",
           details: "This is an Comedy movie",
@@ -84,7 +84,7 @@
 
       let movie;
       for (let i = 0; i < movieData.length; i++) {
-        if (movieData[i].id === movieId) {
+        if (movieData[i].id === Number(movieId)) {
           movie = movieData[i];
         }
       }

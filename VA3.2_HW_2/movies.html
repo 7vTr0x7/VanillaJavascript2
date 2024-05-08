@@ -42,48 +42,145 @@
       </nav>
     </header>
 
-    <main>
-      <section id="movies" class="container">
-        <h1>List Of Movies</h1>
+    <section id="movies" class="container">
+      <h1>Add a New Movie</h1>
+      <label for="movieTitle">Title : </label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" id="movieTitle" />
+      </div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h2>Movie 1</h2>
-              </div>
-              <div class="card-body">
-                <p><b>Genre</b> : Action</p>
-                <a class="btn btn-primary" href="details.html?id=1">Details</a>
-              </div>
-            </div>
-          </div>
+      <label for="">Genre : </label>
+      <div class="mb-3">
+        <select class="form-select" id="genreSelect">
+          <option value="Action">Action</option>
+          <option value="Drama">Drama</option>
+          <option value="Comedy">Comedy</option>
+        </select>
+      </div>
 
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h2>Movie 2</h2>
-              </div>
-              <div class="card-body">
-                <p><b>Genre</b> : Drama</p>
-                <a class="btn btn-primary" href="details.html?id=2">Details</a>
-              </div>
-            </div>
-          </div>
+      <label for="releaseDate">Release Date : </label>
+      <div class="input-group mb-3">
+        <input type="date" class="form-control" id="releaseDate" />
+      </div>
 
-          <div class="col-md-6">
-            <div class="card my-3">
-              <div class="card-header">
-                <h2>Movie 3</h2>
-              </div>
-              <div class="card-body">
-                <p><b>Genre</b> : Comedy</p>
-                <a class="btn btn-primary" href="details.html?id=3">Details</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+      <label for="director">Director : </label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" id="director" />
+      </div>
+
+      <button id="addMovie" class="btn btn-primary">Add Movie</button>
+    </section>
+
+    <section class="container my-4">
+      <div id="movieDetails"></div>
+    </section>
+
+    <script>
+      let movieData = [
+        {
+          id: 1,
+          movie: "Movie 1",
+          genre: "Action",
+          details: "This is an Action movie",
+          releaseDate: "2024-04-19",
+          director: "Guts",
+        },
+        {
+          id: 2,
+          movie: "Movie 2",
+          genre: "Drama",
+          details: "This is an Drama movie",
+          releaseDate: "2023-06-1",
+          director: "Levi",
+        },
+
+        {
+          id: 3,
+          movie: "Movie 3",
+          genre: "Comedy",
+          details: "This is an Comedy movie",
+          releaseDate: "2022-03-9",
+          director: "John Cena",
+        },
+      ];
+
+      const addMovie = document.getElementById("addMovie");
+      const movieDetails = document.getElementById("movieDetails");
+
+      const updateMovieDetails = () => {
+        movieDetails.innerHTML = ``;
+
+        for (let i = 0; i < movieData.length; i++) {
+          const col = document.createElement("div");
+          col.className = "col-md-6 mb-3";
+
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const h2 = document.createElement("h2");
+          h2.className = "card-text";
+          h2.textContent = movieData[i].movie;
+
+          const cardHeader = document.createElement("div");
+          cardHeader.className = "card-header";
+
+          cardHeader.appendChild(h2);
+
+          const cardBody = document.createElement("div");
+          cardBody.className = "card-body";
+
+          const genre = document.createElement("p");
+          genre.className = "card-text";
+          genre.innerHTML = `<b>Genre : </b> ${movieData[i].genre}`;
+
+          const releaseDate = document.createElement("p");
+          releaseDate.className = "card-text";
+          releaseDate.innerHTML = `<b>Release Date : </b> ${movieData[i].releaseDate}`;
+
+          const director = document.createElement("p");
+          director.className = "card-text";
+          director.innerHTML = `<b>Director : </b> ${movieData[i].director}`;
+
+          const detailsLink = document.createElement("a");
+          detailsLink.href = `details.html?id=${movieData[i].id}`;
+          detailsLink.textContent = "Details";
+          detailsLink.className = "btn btn-primary";
+
+          cardBody.appendChild(genre);
+          cardBody.appendChild(releaseDate);
+          cardBody.appendChild(director);
+          cardBody.appendChild(detailsLink);
+
+          card.append(cardHeader);
+          card.append(cardBody);
+
+          col.appendChild(card);
+          movieDetails.appendChild(col);
+        }
+      };
+
+      addMovie.addEventListener("click", () => {
+        const movieTitle = document.getElementById("movieTitle").value;
+        const genreSelect = document.getElementById("genreSelect").value;
+        const releaseDate = document.getElementById("releaseDate").value;
+        const director = document.getElementById("director").value;
+
+        const movieId = movieData.length + 1;
+
+        const newMovie = {
+          id: movieId,
+          movie: movieTitle,
+          genre: genreSelect,
+          details: "This is a great movie",
+          releaseDate: releaseDate,
+          director: director,
+        };
+
+        movieData.push(newMovie);
+        updateMovieDetails();
+      });
+
+      updateMovieDetails();
+    </script>
   </body>
 </html>
