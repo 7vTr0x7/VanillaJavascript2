@@ -43,7 +43,29 @@
     </header>
 
     <section id="movies" class="container">
-      <h1>Add a New Movie</h1>
+      <h1>List Of Movies</h1>
+      <div class="row my-4">
+        <div class="col-md-6">
+          <label for="genreFilter">Filter by Genre : </label>
+          <select id="genreFilter" class="form-select">
+            <option value="All">All Genres</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="directorFilter">Filter by Director : </label>
+          <select id="directorFilter" class="form-select">
+            <option value="All">All Directors</option>
+
+            <option value="John Doe">John Doe</option>
+            <option value="Alex">Alex</option>
+            <option value="Jane Smith">Jane Smith</option>
+          </select>
+        </div>
+      </div>
+      <h2>Add a New Movie</h2>
       <form>
         <label for="movieTitle">Title : </label>
         <div class="input-group mb-3">
@@ -87,7 +109,7 @@
           genre: "Action",
           details: "This is an Action movie",
           releaseDate: "2024-04-19",
-          director: "Guts",
+          director: "Jane Smith",
         },
         {
           id: 2,
@@ -95,7 +117,7 @@
           genre: "Drama",
           details: "This is an Drama movie",
           releaseDate: "2023-06-1",
-          director: "Levi",
+          director: "Alex",
         },
 
         {
@@ -104,14 +126,16 @@
           genre: "Comedy",
           details: "This is an Comedy movie",
           releaseDate: "2022-03-9",
-          director: "John Cena",
+          director: "John Doe",
         },
       ];
 
       const addMovie = document.getElementById("addMovie");
       const movieDetails = document.getElementById("movieDetails");
+      const directorFilter = document.getElementById("directorFilter");
+      const genreFilter = document.getElementById("genreFilter");
 
-      const updateMovieDetails = () => {
+      const updateMovieDetails = (movieData) => {
         movieDetails.innerHTML = ``;
 
         for (let i = 0; i < movieData.length; i++) {
@@ -181,10 +205,40 @@
         };
 
         movieData.push(newMovie);
-        updateMovieDetails();
+        updateMovieDetails(movieData);
       });
 
-      updateMovieDetails();
+      genreFilter.addEventListener("change", () => {
+        const genreFilteredMovies = [];
+
+        if (genreFilter.value !== "All") {
+          for (let i = 0; i < movieData.length; i++) {
+            if (movieData[i].genre === genreFilter.value) {
+              genreFilteredMovies.push(movieData[i]);
+            }
+          }
+          updateMovieDetails(genreFilteredMovies);
+        } else {
+          updateMovieDetails(movieData);
+        }
+      });
+
+      directorFilter.addEventListener("change", () => {
+        const directorFilteredMovies = [];
+
+        if (directorFilter.value !== "All") {
+          for (let i = 0; i < movieData.length; i++) {
+            if (directorFilter.value === movieData[i].director) {
+              directorFilteredMovies.push(movieData[i]);
+            }
+          }
+          updateMovieDetails(directorFilteredMovies);
+        } else {
+          updateMovieDetails(movieData);
+        }
+      });
+
+      updateMovieDetails(movieData);
     </script>
   </body>
 </html>
