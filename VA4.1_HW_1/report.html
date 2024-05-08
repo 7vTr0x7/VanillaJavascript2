@@ -8,48 +8,83 @@
       rel="stylesheet" />
   </head>
 
-  <body>
-    <header>
-      <h1>HR Report</h1>
-      <hr />
-    </header>
-    <main class="container">
-      <section class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-header">
-              <h2>Most Worked Employee</h2>
-            </div>
-            <div class="card-body">
-              <p>Name : Jane Smith</p>
+  <section class="container my-4">
+    <h1>HR Report</h1>
+    <hr />
+    <div id="employeeDetails" class="row"></div>
+  </section>
 
-              <p>Hours Worked : 220</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-header">
-              <h2>Highest Rated Employee</h2>
-            </div>
-            <div class="card-body">
-              <p>Name : Jane Smith</p>
+  <script>
+    const employeeReport = () => {
+      const mostWorkedEmployee = { name: "John Doe", hoursWorked: 210 };
+      const highestRatedEmployee = {
+        name: "Jane Smith",
+        performanceRate: 0.95,
+      };
+      const totalOverTimeHours = { overTimeHours: 35 };
 
-              <p>Performance Rate : 0.95</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-header">
-              <h2>Total Overtime Hours</h2>
-            </div>
-            <div class="card-body">
-              <p>Total Overtime Hours : 45</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-  </body>
+      const createCard = (cardObj) => {
+        const employeeDetails = document.getElementById("employeeDetails");
+
+        const col = document.createElement("div");
+        col.className = "col-md-4";
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const h2 = document.createElement("h2");
+        h2.className = "card-text";
+
+        const cardHeader = document.createElement("div");
+        cardHeader.className = "card-header";
+
+        const cardBody = document.createElement("div");
+        cardBody.className = "card-body";
+
+        if (cardObj !== totalOverTimeHours) {
+          h2.textContent =
+            cardObj === mostWorkedEmployee
+              ? `Most Worked Employee`
+              : `Highest Rated Employee`;
+
+          cardHeader.appendChild(h2);
+
+          const employeeName = document.createElement("p");
+          employeeName.innerHTML =
+            cardObj === mostWorkedEmployee
+              ? `<b>Name : </b> ${mostWorkedEmployee.name}`
+              : `<b>Name : </b> ${highestRatedEmployee.name}`;
+
+          const employeeStats = document.createElement("p");
+          employeeStats.innerHTML =
+            cardObj === mostWorkedEmployee
+              ? `<b>Hours Worked : </b> ${mostWorkedEmployee.hoursWorked}`
+              : `<b>Performance Rate : </b> ${highestRatedEmployee.performanceRate}`;
+
+          cardBody.appendChild(employeeName);
+          cardBody.appendChild(employeeStats);
+        } else {
+          h2.textContent = `Total Overtime Hours`;
+          cardHeader.appendChild(h2);
+
+          const overtime = document.createElement("p");
+          overtime.innerHTML = `<b>Overtime Hours :</b> ${totalOverTimeHours.overTimeHours}`;
+
+          cardBody.appendChild(overtime);
+        }
+
+        card.appendChild(cardHeader);
+        card.appendChild(cardBody);
+
+        col.appendChild(card);
+        employeeDetails.appendChild(col);
+      };
+
+      createCard(mostWorkedEmployee);
+      createCard(highestRatedEmployee);
+      createCard(totalOverTimeHours);
+    };
+
+    employeeReport();
+  </script>
 </html>
