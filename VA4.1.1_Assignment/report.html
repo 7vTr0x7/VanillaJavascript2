@@ -41,36 +41,85 @@
         </div>
       </nav>
     </header>
-    <main>
-      <section id="report" class="container">
-        <h1>Movies Report</h1>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h2>Top-Rated Movie</h2>
-              </div>
-              <div class="card-body">
-                <p><b>Title : </b> Movie 3</p>
-                <p><b>Rating : </b> 9.2</p>
-                <p><b>Director : </b> John Cena</p>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h2>Most Popular Genre</h2>
-              </div>
-              <div class="card-body">
-                <p><b>Genre : </b> Action</p>
-                <p><b>Total Movies : </b> 6</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+    <section class="container my-4">
+      <h1>Movie Report</h1>
+
+      <div id="movieReport" class="row"></div>
+    </section>
+
+    <script>
+      const moviesReport = () => {
+        const topRatedMovie = {
+          name: "Movie 1",
+          rating: 9.2,
+          director: "Jane Smith",
+        };
+
+        const mostPopularGenre = { genre: "Action", totalMovies: 3 };
+
+        const createCard = (dataObj) => {
+          const col = document.createElement("div");
+          col.className = "col-md-6";
+
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const h2 = document.createElement("h2");
+          h2.className = "card-text";
+          h2.innerHTML =
+            dataObj === topRatedMovie
+              ? `Top Rated Movie`
+              : `Most Popular Genre`;
+
+          const cardHeader = document.createElement("div");
+          cardHeader.className = "card-header";
+
+          cardHeader.appendChild(h2);
+
+          const cardBody = document.createElement("div");
+          cardBody.className = "card-body";
+
+          const firstData = document.createElement("p");
+          firstData.className = "card-text";
+          firstData.innerHTML =
+            dataObj === topRatedMovie
+              ? `<b>Name : </b> ${dataObj.name}`
+              : `<b>Genre : </b> ${dataObj.genre}`;
+
+          const secondData = document.createElement("p");
+          secondData.className = "card-text";
+
+          secondData.innerHTML =
+            dataObj === topRatedMovie
+              ? `<b>Rating : </b> ${dataObj.rating}`
+              : `<b>Total Movies : </b> ${dataObj.totalMovies}`;
+
+          cardBody.appendChild(firstData);
+          cardBody.appendChild(secondData);
+
+          if (dataObj === topRatedMovie) {
+            const thirdData = document.createElement("p");
+            thirdData.className = "card-text";
+
+            thirdData.innerHTML = `<b>Director : </b> ${topRatedMovie.director} `;
+
+            cardBody.appendChild(thirdData);
+          }
+
+          card.appendChild(cardHeader);
+          card.appendChild(cardBody);
+
+          col.appendChild(card);
+
+          movieReport.appendChild(col);
+        };
+
+        createCard(topRatedMovie);
+        createCard(mostPopularGenre);
+      };
+
+      moviesReport();
+    </script>
   </body>
 </html>
