@@ -194,6 +194,10 @@
               filteredPlayers.push(players[i]);
             }
           }
+        } else {
+          for (let i = 0; i < players.length; i++) {
+            filteredPlayers.push(players[i]);
+          }
         }
 
         updatePlayerList(filteredPlayers);
@@ -211,6 +215,10 @@
             if (selectedCountry === players[i].country) {
               filteredCountries.push(players[i]);
             }
+          }
+        } else {
+          for (let i = 0; i < players.length; i++) {
+            filteredCountries.push(players[i]);
           }
         }
         updatePlayerList(filteredCountries);

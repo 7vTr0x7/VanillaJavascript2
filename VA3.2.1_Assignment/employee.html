@@ -54,7 +54,7 @@
       </form>
     </section>
 
-    <section class="container">
+    <section class="container my-4">
       <div id="employeeDetails"></div>
     </section>
     <script>
@@ -143,8 +143,12 @@
               filteredEmployees.push(employees[i]);
             }
           }
-          updateEmployeeDetails(filteredEmployees);
+        } else {
+          for (let i = 0; i < employees.length; i++) {
+            filteredEmployees.push(employees[i]);
+          }
         }
+        updateEmployeeDetails(filteredEmployees);
       });
 
       updateEmployeeDetails(employees);
