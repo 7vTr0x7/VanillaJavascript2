@@ -16,40 +16,138 @@
         <h1>List Of Employees</h1>
       </div>
     </header>
-    <main class="container mt-4">
-      <ul class="list-group">
-        <li
-          class="list-group-item d-flex justify-content-between align-items-center">
-          <div>
-            <h4>John Doe</h4>
-            <p>Software developer</p>
-          </div>
-          <a class="btn btn-link" href=" employeeDetails.html?id=1"
-            >View Details</a
-          >
-        </li>
-        <li
-          class="list-group-item d-flex justify-content-between align-items-center">
-          <div>
-            <h4>Jane Smith</h4>
-            <p>Designer</p>
-          </div>
-          <a class="btn btn-link" href="employeeDetails.html?id=2"
-            >View Details</a
-          >
-        </li>
 
-        <li
-          class="list-group-item d-flex justify-content-between align-items-center">
-          <div>
-            <h4>Bob Johnson</h4>
-            <p>Product Manager</p>
-          </div>
-          <a class="btn btn-link" href="employeeDetails.html?id=3"
-            >View Details</a
-          >
-        </li>
-      </ul>
-    </main>
+    <section class="container my-4">
+      <div class="mb-4">
+        <label for="departmentFilter">Filter By Department : </label>
+        <select class="form-select w-50" id="departmentFilter">
+          <option value="All">All Department</option>
+          <option value="IT">IT</option>
+          <option value="Management">Management</option>
+          <option value="Design">Design</option>
+        </select>
+      </div>
+
+      <h1>Add Employee</h1>
+
+      <form>
+        <label for="employeeName">Name : </label>
+        <div class="input-group mb-3">
+          <input type="text" id="employeeName" class="form-control" />
+        </div>
+        <label for="title">Title : </label>
+        <div class="input-group mb-3">
+          <input type="text" id="title" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="departmentSelect">Department : </label>
+          <select class="form-select" id="departmentSelect">
+            <option value="IT">IT</option>
+            <option value="Management">Management</option>
+            <option value="Design">Design</option>
+          </select>
+        </div>
+
+        <button type="button" id="addEmployee" class="btn btn-primary">
+          Add Employee
+        </button>
+      </form>
+    </section>
+
+    <section class="container">
+      <div id="employeeDetails"></div>
+    </section>
+    <script>
+      let employees = [
+        {
+          id: 1,
+          name: "John Doe",
+          title: "Software Developer",
+          department: "IT",
+        },
+        {
+          id: 2,
+          name: "Jane Smith",
+          title: "Designer",
+          department: "Design",
+        },
+        {
+          id: 3,
+          name: "Bob Johnson",
+          title: "Product Manager",
+          department: "Management",
+        },
+      ];
+
+      const employeeDetails = document.getElementById("employeeDetails");
+      const addEmployee = document.getElementById("addEmployee");
+      const departmentFilter = document.getElementById("departmentFilter");
+
+      const updateEmployeeDetails = (employees) => {
+        employeeDetails.innerHTML = ``;
+
+        for (let i = 0; i < employees.length; i++) {
+          const ul = document.createElement("ul");
+          ul.className = "list-group";
+
+          const li = document.createElement("li");
+          li.className =
+            "list-group-item d-flex justify-content-between align-items-center ";
+
+          const EmpDetails = document.createElement("div");
+
+          const name = document.createElement("h4");
+          name.textContent = employees[i].name;
+
+          const title = document.createElement("p");
+          title.textContent = employees[i].title;
+
+          EmpDetails.appendChild(name);
+          EmpDetails.appendChild(title);
+          console.log(EmpDetails.childNodes);
+
+          const detailsLink = document.createElement("a");
+          detailsLink.href = `employeeDetails.html?id=${employees[i].id}`;
+          detailsLink.textContent = "View Details";
+          detailsLink.className = "btn btn-link";
+
+          li.appendChild(EmpDetails);
+          li.appendChild(detailsLink);
+          ul.appendChild(li);
+          employeeDetails.appendChild(ul);
+        }
+      };
+
+      addEmployee.addEventListener("click", () => {
+        const employeeName = document.getElementById("employeeName").value;
+        const department = document.getElementById("departmentSelect").value;
+        const title = document.getElementById("title").value;
+
+        const employeeId = employees.length + 1;
+        const newEmployee = {
+          id: employeeId,
+          name: employeeName,
+          title: title,
+          department: department,
+        };
+
+        employees.push(newEmployee);
+        updateEmployeeDetails(employees);
+      });
+
+      departmentFilter.addEventListener("change", () => {
+        let filteredEmployees = [];
+        if (departmentFilter.value !== "All") {
+          for (let i = 0; i < employees.length; i++) {
+            if (employees[i].department === departmentFilter.value) {
+              filteredEmployees.push(employees[i]);
+            }
+          }
+          updateEmployeeDetails(filteredEmployees);
+        }
+      });
+
+      updateEmployeeDetails(employees);
+    </script>
   </body>
 </html>

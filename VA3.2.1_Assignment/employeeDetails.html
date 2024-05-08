@@ -22,19 +22,19 @@
     <script>
       let employees = [
         {
-          id: "1",
+          id: 1,
           name: "John Doe",
           title: "Software Developer",
           department: "IT",
         },
         {
-          id: "2",
+          id: 2,
           name: "Jane Smith",
           title: "Designer",
           department: "Design",
         },
         {
-          id: "3",
+          id: 3,
           name: "Bob Johnson",
           title: "Product Manager",
           department: "Management",
@@ -52,7 +52,7 @@
       let employee;
 
       for (let i = 0; i < employees.length; i++) {
-        if (employees[i].id === employeeId) {
+        if (employees[i].id === Number(employeeId)) {
           employee = employees[i];
         }
       }
