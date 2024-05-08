@@ -194,13 +194,10 @@
               filteredPlayers.push(players[i]);
             }
           }
+          updatePlayerList(filteredPlayers);
         } else {
-          for (let i = 0; i < players.length; i++) {
-            filteredPlayers.push(players[i]);
-          }
+          updatePlayerList(players);
         }
-
-        updatePlayerList(filteredPlayers);
       };
 
       roleFilter.addEventListener("change", applyFilter);
@@ -216,12 +213,10 @@
               filteredCountries.push(players[i]);
             }
           }
+          updatePlayerList(filteredCountries);
         } else {
-          for (let i = 0; i < players.length; i++) {
-            filteredCountries.push(players[i]);
-          }
+          updatePlayerList(players);
         }
-        updatePlayerList(filteredCountries);
       };
 
       countryFilter.addEventListener("change", applyCountryFilter);
