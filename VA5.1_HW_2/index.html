@@ -5,5 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Joke API - Programming Joke</h1>
+    <button id="getJoke">Get Programming Joke</button>
+
+    <div id="displayJoke"></div>
+
+    <script>
+      const getJoke = document.querySelector("#getJoke");
+      const displayJoke = document.querySelector("#displayJoke");
+
+      const jokeAPi = "https://v2.jokeapi.dev/joke/Programming?type=single";
+
+      getJoke.addEventListener("click", () => {
+        fetch(jokeAPi)
+          .then((response) => {
+            return response.json();
+          })
+          .then((result) => {
+            displayJoke.textContent = `${result.joke}`;
+          })
+          .catch((error) => {
+            displayJoke.textContent = `Error Occurred While Fetching Joke.`;
+          });
+      });
+    </script>
+  </body>
 </html>
