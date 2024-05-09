@@ -5,5 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Todo API</h1>
+    <button id="getData">Get Data</button>
+    <div id="dataContainer"></div>
+
+    <script>
+      const getData = document.querySelector("#getData");
+      const dataContainer = document.querySelector("#dataContainer");
+      const url = "https://jsonplaceholder.typicode.com/todos/5";
+
+      getData.addEventListener("click", () => {
+        fetch(url)
+          .then((response) => {
+            return response.json();
+          })
+          .then((result) => {
+            dataContainer.innerHTML = `User Id : ${result.userId} <br/> Title : ${result.title} <br/>  Completed Status : ${result.completed}`;
+          })
+          .catch((error) => {
+            dataContainer.textContent = `Error occurred while fetching data.`;
+          });
+      });
+    </script>
+  </body>
 </html>
