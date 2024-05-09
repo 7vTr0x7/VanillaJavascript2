@@ -5,5 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>API Post Call</h1>
+
+    <form id="postApiForm">
+      <label>Name : </label>
+      <input type="text" id="name" />
+      <label>Massage : </label>
+      <input type="text" id="message" />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="responseContainer"></div>
+
+    <script>
+      const postApiForm = document.querySelector("#postApiForm");
+      const responseContainer = document.querySelector("#responseContainer");
+
+      const name = document.querySelector("#name");
+      const message = document.querySelector("#message");
+
+      postApiForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+
+        const requestData = {
+          name: name.value,
+          message: message.value,
+        };
+
+        fetch(apiUrl, {
+          method: "POST",
+          body: JSON.stringify(requestData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data) {
+              responseContainer.textContent = JSON.stringify(data);
+            } else {
+              responseContainer.textContent = "Failed to Post call";
+            }
+          })
+          .catch((error) => {
+            responseContainer.textContent = "Error Occurred While Post call";
+          });
+      });
+    </script>
+  </body>
 </html>
