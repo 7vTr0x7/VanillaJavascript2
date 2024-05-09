@@ -35,7 +35,12 @@
 
               <b>City : </b> ${data.results[0].location.city} 
               `;
+            } else {
+              userContainer.textContent = "Failed To Find User";
             }
+          })
+          .catch((error) => {
+            userContainer.textContent = "Error Occurred While fetching User";
           });
       });
     </script>
