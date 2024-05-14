@@ -5,5 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Employee List</h1>
+    <ul id="employeeList"></ul>
+
+    <script>
+      const employeeList = document.querySelector("#employeeList");
+
+      const apiUrl =
+        "https://employee-management-backend-student-neog-ca.replit.app/employees";
+
+      const fetchEmployeeData = () => {
+        employeeList.textContent = "Loading...";
+
+        fetch(apiUrl)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data) {
+              employeeList.textContent = "";
+
+              for (let i = 0; i < data.length; i++) {
+                const liElement = document.createElement("li");
+                liElement.textContent = `${data[i].name} - ${data[i].country} - ${data[i].department}`;
+
+                employeeList.appendChild(liElement);
+              }
+            }
+          })
+          .catch((error) => {
+            employeeList.textContent = "Error Occurred While Fetching data.";
+          });
+      };
+      fetchEmployeeData();
+    </script>
+  </body>
 </html>
