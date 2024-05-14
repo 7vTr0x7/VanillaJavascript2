@@ -5,5 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Movie List</h1>
+    <ul id="movieList"></ul>
+
+    <script>
+      const movieList = document.querySelector("#movieList");
+
+      const apiUrl =
+        "https://va-5-assignment-express-student-neog.replit.app/movies";
+
+      const fetchMovies = () => {
+        movieList.textContent = "Loading...";
+        fetch(apiUrl)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data) {
+              movieList.textContent = "";
+              for (let i = 0; i < data.length; i++) {
+                const liElement = document.createElement("li");
+                liElement.textContent = `${data[i].title} - ${data[i].language} - ${data[i].rating} - ${data[i].director}`;
+
+                movieList.appendChild(liElement);
+              }
+            }
+          })
+          .catch((error) => {
+            movieList.textContent = "Error Occurred While fetching movies";
+          });
+      };
+
+      fetchMovies();
+    </script>
+  </body>
 </html>
