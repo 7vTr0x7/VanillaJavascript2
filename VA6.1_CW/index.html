@@ -5,5 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Student List</h1>
+    <ul id="studentList"></ul>
+
+    <script>
+      const studentList = document.querySelector("#studentList");
+
+      const apiUrl =
+        "https://student-management-student-neog.replit.app/students";
+
+      const fetchData = () => {
+        studentList.textContent = "Loading...";
+        fetch(apiUrl)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data) {
+              studentList.textContent = "";
+              for (let i = 0; i < data.length; i++) {
+                const liElement = document.createElement("li");
+                liElement.textContent = `${data[i].name} - ${data[i].grade}`;
+
+                studentList.appendChild(liElement);
+              }
+            }
+          })
+          .catch((error) => {
+            studentList.textContent = "An Error occurred while fetching data. ";
+          });
+      };
+
+      fetchData();
+    </script>
+  </body>
 </html>
