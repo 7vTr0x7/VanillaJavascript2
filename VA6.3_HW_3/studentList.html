@@ -110,37 +110,37 @@
                   studentList.appendChild(liElement);
                 }
               }
+
+              const deleteButtons = document.querySelectorAll("#deleteBtn");
+
+              for (let i = 0; i < deleteButtons.length; i++) {
+                deleteButtons[i].addEventListener("click", (event) => {
+                  const studentId = event.target.getAttribute("data-id");
+
+                  const apiDeleteUrl = `https://student-management-Student-neog.replit.app/students/${studentId}`;
+
+                  fetch(apiDeleteUrl, {
+                    method: "DELETE",
+                  })
+                    .then((res) => {
+                      return res.json();
+                    })
+                    .then((data) => {
+                      if (data) {
+                        loading.style.display = "block";
+                        fetchStudent(gender);
+                      } else {
+                        loading.textContent = "Failed to delete details";
+                      }
+                    })
+                    .catch((error) => {
+                      loading.textContent =
+                        "Error occurred while deleting details";
+                    });
+                });
+              }
             } else {
               loading.textContent = "Failed to get data.";
-            }
-
-            const deleteButtons = document.querySelectorAll("#deleteBtn");
-
-            for (let i = 0; i < deleteButtons.length; i++) {
-              deleteButtons[i].addEventListener("click", (event) => {
-                const studentId = event.target.getAttribute("data-id");
-
-                const apiDeleteUrl = `https://student-management-Student-neog.replit.app/students/${studentId}`;
-
-                fetch(apiDeleteUrl, {
-                  method: "DELETE",
-                })
-                  .then((res) => {
-                    return res.json();
-                  })
-                  .then((data) => {
-                    if (data) {
-                      loading.style.display = "block";
-                      fetchStudent();
-                    } else {
-                      loading.textContent = "Failed to delete details";
-                    }
-                  })
-                  .catch((error) => {
-                    loading.textContent =
-                      "Error occurred while deleting details";
-                  });
-              });
             }
           })
           .catch((error) => {
