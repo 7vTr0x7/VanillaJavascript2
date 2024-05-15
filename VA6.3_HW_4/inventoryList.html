@@ -44,7 +44,7 @@
                 <a class="nav-link" href="#list">Item List</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Add Item</a>
+                <a class="nav-link" href="addItem.html">Add Item</a>
               </li>
             </ul>
           </div>
@@ -94,7 +94,7 @@
                     const liElement = document.createElement("li");
                     liElement.className = "list-group-item";
 
-                    liElement.innerHTML = `${data[i].name} - Quantity: ${data[i].quantity} - Category: ${data[i].category}  <button class="btn btn-danger float-end" id="deleteBtn" data-id="${data[i]._id}" >Delete</button>`;
+                    liElement.innerHTML = `${data[i].itemName} - Quantity: ${data[i].quantity} - Category: ${data[i].category}  <button class="btn btn-danger float-end" id="deleteBtn" data-id="${data[i]._id}" >Delete</button>`;
 
                     inventoryList.appendChild(liElement);
                   }
@@ -104,7 +104,7 @@
                   const liElement = document.createElement("li");
                   liElement.className = "list-group-item";
 
-                  liElement.innerHTML = `${data[i].name} - Quantity: ${data[i].quantity} - Category: ${data[i].category}  <button class="btn btn-danger float-end" id="deleteBtn" data-id="${data[i]._id}" >Delete</button>`;
+                  liElement.innerHTML = `${data[i].itemName} - Quantity: ${data[i].quantity} - Category: ${data[i].category}  <button class="btn btn-danger float-end" id="deleteBtn" data-id="${data[i]._id}" >Delete</button>`;
 
                   inventoryList.appendChild(liElement);
                 }
