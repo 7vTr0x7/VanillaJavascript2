@@ -44,7 +44,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Players List</a>
+                <a class="nav-link" href="playersList.html">Players List</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#add">Add Players</a>
@@ -105,11 +105,11 @@
           <select class="form-select mb-3" id="roles">
             <option value="Batsman">Batsman</option>
             <option value="Bowler">Bowler</option>
-            <option value="All-rounder">All-rounder</option>
+            <option value="All-Rounder">All-Rounder</option>
           </select>
 
-          <label for="batingHand">Bating Hand: </label>
-          <select class="form-select mb-3" id="batingHand">
+          <label for="battingHand">batting Hand: </label>
+          <select class="form-select mb-3" id="battingHand">
             <option value="Right Handed">Right Handed</option>
             <option value="Left Handed">Left Handed</option>
             <option value="Both">Both</option>
@@ -140,7 +140,7 @@
       const phoneNumber = document.querySelector("#phoneNumber");
       const email = document.querySelector("#email");
       const roles = document.querySelector("#roles");
-      const batingHand = document.querySelector("#batingHand");
+      const battingHand = document.querySelector("#battingHand");
       const bowlingStyle = document.querySelector("#bowlingStyle");
 
       const loading = document.querySelector("#loading");
@@ -155,15 +155,15 @@
         loading.style.display = "block";
 
         const playerData = {
-          playerName: name.value,
+          fullName: playerName.value,
           dateOfBirth: dob.value,
           nationality: nationality.value,
           placeOfBirth: placeOfBirth.value,
           contactAddress: contactAddress.value,
           phoneNumber: phoneNumber.value,
-          email: email.value,
+          emailAddress: email.value,
           playingRole: roles.value,
-          batingHand: batingHand.value,
+          battingHand: battingHand.value,
           bowlingStyle: bowlingStyle.value,
         };
 
