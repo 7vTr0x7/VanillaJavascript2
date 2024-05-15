@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
+"></script>
+
+    <style>
+      #loading {
+        display: none;
+      }
+      #success {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid px-3">
+          <a class="navbar-brand" href="index.html">ICC Player Management</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Players List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#add">Add Players</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container my-5" id="add">
+        <h1 class="mb-4">Add Players</h1>
+
+        <div id="loading" class="bg-body-secondary px-4 py-2 my-3">
+          Saving data...
+        </div>
+        <div id="success" class="bg-body-secondary px-4 py-2 my-3">
+          Data Saved Successfully...
+        </div>
+
+        <form id="playerForm">
+          <label for="playerName">Player Full Name: </label>
+          <div class="input-group mb-3">
+            <input type="text" id="playerName" class="form-control" />
+          </div>
+
+          <label for="dob">Date Of Birth: </label>
+          <div class="input-group mb-3">
+            <input type="date" id="dob" class="form-control" />
+          </div>
+          <label for="nationality">Nationality: </label>
+          <div class="input-group mb-3">
+            <input type="text" id="nationality" class="form-control" />
+          </div>
+
+          <label for="placeOfBirth">Place Of Birth: </label>
+          <div class="input-group mb-3">
+            <input type="text" id="placeOfBirth" class="form-control" />
+          </div>
+
+          <label for="contactAddress">Contact Address: </label>
+          <textarea
+            class="form-control mb-3"
+            id="contactAddress"
+            rows="4"></textarea>
+
+          <label for="phoneNumber">Phone Number: </label>
+          <div class="input-group mb-3">
+            <input type="number" id="phoneNumber" class="form-control" />
+          </div>
+
+          <label for="email">Email Address: </label>
+          <div class="input-group mb-3">
+            <input type="email" id="email" class="form-control" />
+          </div>
+
+          <label for="roles">Playing Roles: </label>
+          <select class="form-select mb-3" id="roles">
+            <option value="Batsman">Batsman</option>
+            <option value="Bowler">Bowler</option>
+            <option value="All-rounder">All-rounder</option>
+          </select>
+
+          <label for="batingHand">Bating Hand: </label>
+          <select class="form-select mb-3" id="batingHand">
+            <option value="Right Handed">Right Handed</option>
+            <option value="Left Handed">Left Handed</option>
+            <option value="Both">Both</option>
+          </select>
+
+          <label for="bowlingStyle">Bowling Style: </label>
+          <select class="form-select mb-3" id="bowlingStyle">
+            <option value="Right-Arm Fast">Right-Arm Fast</option>
+            <option value="Left-Arm Fast">Left-Arm Fast</option>
+            <option value="Right-Arm Fast">Right-Arm Medium</option>
+            <option value="Left-Arm Fast">Left-Arm Medium</option>
+            <option value="Right-Arm spin">Right-Arm (Off-Spin)</option>
+            <option value="Left-Arm spin">Left-Arm (Off-Spin)</option>
+          </select>
+
+          <button type="submit" class="btn btn-primary my-4">Add player</button>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      const playerForm = document.querySelector("#playerForm");
+      const playerName = document.querySelector("#playerName");
+      const dob = document.querySelector("#dob");
+      const nationality = document.querySelector("#nationality");
+      const placeOfBirth = document.querySelector("#placeOfBirth");
+      const contactAddress = document.querySelector("#contactAddress");
+      const phoneNumber = document.querySelector("#phoneNumber");
+      const email = document.querySelector("#email");
+      const roles = document.querySelector("#roles");
+      const batingHand = document.querySelector("#batingHand");
+      const bowlingStyle = document.querySelector("#bowlingStyle");
+
+      const loading = document.querySelector("#loading");
+      const success = document.querySelector("#success");
+
+      const apiUrl =
+        "https://players-backend-student-neog-ca.replit.app/players";
+
+      playerForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        loading.style.display = "block";
+
+        const playerData = {
+          playerName: name.value,
+          dateOfBirth: dob.value,
+          nationality: nationality.value,
+          placeOfBirth: placeOfBirth.value,
+          contactAddress: contactAddress.value,
+          phoneNumber: phoneNumber.value,
+          email: email.value,
+          playingRole: roles.value,
+          batingHand: batingHand.value,
+          bowlingStyle: bowlingStyle.value,
+        };
+
+        fetch(apiUrl, {
+          method: "POST",
+          body: JSON.stringify(playerData),
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data) {
+              loading.style.display = "none";
+              success.style.display = "block";
+            } else {
+              loading.textContent = "Failed to send data";
+            }
+          })
+          .catch((error) => {
+            loading.textContent = "Error occurred while sending data";
+          });
+      });
+    </script>
+  </body>
+</html>
