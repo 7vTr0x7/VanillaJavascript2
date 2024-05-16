@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
+"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">Laptop Store</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="laptops.html">Laptops</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Report</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container my-4">
+        <h1>Laptop Details</h1>
+        <div id="laptopDetails" class="col-md-8 my-4"></div>
+      </div>
+    </main>
+
+    <script>
+      const laptops = [
+        {
+          id: 1,
+          brand: "Dell",
+          model: "Inspiron 15",
+          details: "Powerful performance in a sleek design.",
+          laptopImg:
+            "https://placehold.co/300x200/EFEFEFF/grey?text=Dell%20Inspiron%2015",
+          processor: "Intel Core i7",
+          RAM: "16GB",
+          storage: "512GB SSD",
+          price: 1200,
+        },
+        {
+          id: 2,
+          brand: "HP",
+          model: "Pavilion x360",
+          details:
+            "Versatile 2-in-1 laptop for productivity and entertainment.",
+          laptopImg:
+            "https://placehold.co/300x200/EFEFEFF/grey?text=HP%20Pavilion%20x360",
+          processor: "AMD Ryzen 5",
+          RAM: "8GB",
+          storage: "256GB SSD",
+          price: 900,
+        },
+        {
+          id: 3,
+          brand: "Lenovo",
+          model: "ThinkPad X1 Carbon",
+          details: "Ultra-lightweight and durable business laptop.",
+          laptopImg:
+            "https://placehol.co/300x200/EFEFEFF/grey?text=Lenovo%20ThinkPad%20X1%20Carbon",
+          processor: "Intel Core i5",
+          RAM: "8GB",
+          storage: "256GB SSD",
+          price: 1500,
+        },
+      ];
+
+      const laptopDetails = document.querySelector("#laptopDetails");
+
+      const getId = (id) => {
+        const url = new URL(window.location.href);
+
+        return url.searchParams.get(id);
+      };
+
+      const laptopId = getId("id");
+
+      for (let i = 0; i < laptops.length; i++) {
+        if (laptops[i].id === Number(laptopId)) {
+          const card = document.createElement("div");
+          card.className = "card px-3";
+
+          const img = document.createElement("img");
+          img.src = `${laptops[i].laptopImg}`;
+          img.height = "250";
+          img.width = "250";
+          img.alt = `${laptops[i].brand} ${laptops[i].model}`;
+
+          const h4 = document.createElement("h4");
+          h4.innerHTML = `${laptops[i].brand} ${laptops[i].model}`;
+
+          const details = document.createElement("p");
+          details.innerHTML = `<b>Details: </b> ${laptops[i].details}`;
+          const processor = document.createElement("p");
+          processor.innerHTML = `<b>Processor: </b> ${laptops[i].processor}`;
+          const ram = document.createElement("p");
+          ram.innerHTML = `<b>RAM: </b> ${laptops[i].RAM}`;
+          const storage = document.createElement("p");
+          storage.innerHTML = `<b>Storage: </b> ${laptops[i].storage}`;
+
+          card.appendChild(img);
+          card.appendChild(h4);
+          card.appendChild(details);
+          card.appendChild(processor);
+          card.appendChild(ram);
+          card.appendChild(storage);
+
+          laptopDetails.appendChild(card);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -33,7 +33,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Laptops</a>
+                <a class="nav-link" href="#laptops">Laptops</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="">Report</a>
@@ -45,7 +45,7 @@
     </header>
 
     <main>
-      <div class="container my-4">
+      <div class="container my-4" id="laptops">
         <h1>List of Laptops</h1>
         <div class="row">
           <div class="col-md-6">
@@ -143,6 +143,7 @@
           price.innerHTML = `<b>Price: </b> ${laptops[i].price} `;
 
           const details = document.createElement("a");
+          details.href = `details.html?id=${laptops[i].id}`;
           details.textContent = "Details";
           details.className = "btn btn-primary";
 
