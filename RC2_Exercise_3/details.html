@@ -105,15 +105,18 @@
       for (let i = 0; i < laptops.length; i++) {
         if (laptops[i].id === Number(laptopId)) {
           const card = document.createElement("div");
-          card.className = "card px-3";
+          card.className = "card p-4";
 
           const img = document.createElement("img");
           img.src = `${laptops[i].laptopImg}`;
-          img.height = "250";
-          img.width = "250";
+          img.height = "360";
+          img.width = "300";
+          img.className = "img-fluid";
+
           img.alt = `${laptops[i].brand} ${laptops[i].model}`;
 
           const h4 = document.createElement("h4");
+          h4.className = "my-3";
           h4.innerHTML = `${laptops[i].brand} ${laptops[i].model}`;
 
           const details = document.createElement("p");
