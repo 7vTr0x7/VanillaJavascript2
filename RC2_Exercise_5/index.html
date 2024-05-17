@@ -139,7 +139,13 @@
 
                 destinationContainer.appendChild(card);
               }
+            } else {
+              destinationContainer.textContent = "failed to get Data";
             }
+          })
+          .catch((error) => {
+            destinationContainer.textContent =
+              "Error occurred while getting data";
           });
       });
     </script>
